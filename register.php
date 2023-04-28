@@ -1,46 +1,55 @@
 <?php
 session_start();
 
-if (isset($_POST["email"]) && isset($_POST["password"])) {
+function main()
+{
+    if (isset($_POST["email"]) && isset($_POST["password"])) {
 
-    $username = $_POST["username"];
-    $useremail = $_POST["email"];
-    $userpassword = $_POST["password"];
-
-    if (file_exists("usersRegister.json")) {
-
-        if (!validateName($username)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "Nome invalido";
-
-            header("Location: login.php");
-        }
-
-        if (!validateMail($useremail)) {
-            // $_SESSION['status'] = "error";
-            // $_SESSION['mensagem'] = "E-mail invalido";
-            die();
-            //header("Location: login.php");
-        }
-
-        if (!validatePassword($userpassword)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "E-mail invalido";
-
-            header("Location: login.php");
-        }
-
-        if (validateMail($useremail) && validateMail($useremail) && validatePassword($userpassword)) {
+        $username = $_POST["username"];
+        $useremail = $_POST["email"];
+        $userpassword = $_POST["password"];
+    
+        if (file_exists("usersRegister.json")) {
+    
+            if (!validateName($username)) {
+                $_SESSION['status'] = "error";
+                $_SESSION['mensagem'] = "Nome invalido";
+    
+                header("Location: login.php");
+                return false;
+            }
+    
+            if (!validateMail($useremail)) {
+                $_SESSION['status'] = "error";
+                $_SESSION['mensagem'] = "E-mail invalido";
+                
+                header("Location: login.php");
+                return false;
+            }
+    
+            if (!validatePassword($userpassword)) {
+                $_SESSION['status'] = "error";
+                $_SESSION['mensagem'] = "E-mail invalido";
+    
+                header("Location: login.php");
+                return false;
+            }
+    
             $isRegister = createUserInFile($username, $useremail, $userpassword);
-            session_unset();
-            header("Location: index.php");
+    
+            if (validateMail($useremail) && validateMail($useremail) && validatePassword($userpassword)) {
+                session_unset();
+                header("Location: index.php");
+            }
         }
-    }
-
-    if (!file_exists("usersRegister.json")) {
-        createUserFile($username, $useremail, $userpassword);
+    
+        if (!file_exists("usersRegister.json")) {
+            createUserFile($username, $useremail, $userpassword);
+        }
     }
 }
+
+
 
 function createUserInFile($username, $useremail, $userpassword)
 {
@@ -131,7 +140,7 @@ function thisEmailExist($email)
     return true;
 }
 
-
+main();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -202,4 +211,5 @@ function thisEmailExist($email)
 </body>
 <script src="script.js"></script>
 <!-- pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$" -->
+
 </html>
