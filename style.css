@@ -1,0 +1,352 @@
+:root {
+    --text-base: #afb6c2;
+    --text-title: #d4ccb6;
+    --background: #191816;
+    --form-background: #24221f;
+    --primary-color: #ffc632;
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 1536px;
+    display: flex;
+    font-family: 'Roboto';
+}
+
+@font-face {
+    font-family: 'poppins';
+    src: url(./assets/Poppins-Regular.ttf);
+}
+
+h1 {
+    font-family: 'poppins';
+    font-size: 24px;
+    font-weight: 600;
+    color: #D4CCB6;
+}
+
+h3 {
+    font-family: 'poppins';
+    font-size: 16px;
+    font-weight: 500;
+    color: #afb6c2;
+}
+
+p {
+    
+    font-size: 16px;
+    font-weight: 500;
+    color: #afb6c2;
+}
+
+.photo {
+    background-image: url(./assets/side-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+    width: 50%;
+    height: 100%;
+}
+
+.content {
+    background-color: #191816;
+    width: 50%;
+    height: 100%;
+}
+
+.logo {
+    margin: 40px 0px 0px 40px;
+}
+
+.input {
+    background-color: #24221F;
+    height: 572px;
+    width: 572px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 24px;
+}
+
+.main {
+    padding: 55px 119px 15px 119px;
+    display: block;
+}
+
+.main2 {
+    padding: 35px 119px 15px 119px;
+    display: block;
+}
+
+.login {
+    margin-right: 10px;
+}
+
+.title {
+    margin: 0;
+}
+
+.topText {
+    margin: 0;
+}
+
+.box2 {
+    margin-top: 5px;
+}
+
+/* .textBox1 {
+       
+} */
+
+.textBox {
+    width: 296px;
+    height: 44px;
+    border: none;
+    color: #afb6c2;
+    padding-left: 33px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border: #D4CCB6 2px solid;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #24221F; 
+}
+
+#email, #email22 {
+    background: url(./assets/mail.svg) no-repeat scroll 7px 13px;
+}
+
+#email:focus, #email22:focus {
+    background: url(./assets/mailFocus.svg) no-repeat scroll 7px 13px;
+}
+
+#password:focus, #password2:focus {
+    background: url(./assets/lockFocus.svg) no-repeat 7px 13px;
+}
+
+#password, #password2 {
+    background: url(./assets/lock.svg) no-repeat 7px 13px;
+}
+
+.textBox:focus {
+    border: #ffc632 solid 3px;
+    outline: none;
+}
+
+.eyeButton {
+    background-color: #24221f;
+    border: none;
+    position: relative;
+    left: 87.4%;
+    top: -47px;
+}
+
+#eye1 {
+    top: 57.5%;
+}
+
+#eye2 {
+    top: 72%;
+}
+
+.submitButton, .submitButton2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    width: 100%;
+    height: 51px;
+    background-color: #ffc632;
+    color: #473404;
+    font-weight: 600;
+    border: none;
+} 
+
+.submitButton2 {
+    margin-top: 5px;
+}
+
+#table, #table222 {
+    color: #D4CCB6;
+    display: none;
+    font-family: 'poppins';
+}
+
+table, th, td {
+    border: #ffc632 solid 1px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tableButton {
+    margin-top: 10px;
+}
+
+.errorBox {
+    background-color: #df7b7b;
+    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
+    display: none;
+    color: #7a0606;
+}
+
+.logOn {
+    color: #ffc632;
+    background-color: #24221f;
+    border: none;
+    justify-content: center;
+        
+}
+
+.buttonBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.logOnMain {
+    padding: 55px 119px 55px 119px;
+    display: none;
+}
+
+.link {
+    text-decoration: none;
+    color: #ffc632;
+    text-align: center;
+    font-family: 'roboto';
+    font-size: 14px;
+    
+}
+
+.link:hover {
+    color: #c19119;
+}
+
+#inputBody {
+    display: block;
+}
+
+#inputBody222 {
+    display: none;
+}
+
+
+            /* Daqui pra baixo só eh pra responsividade!!!! */
+
+
+
+
+@media (min-height: 850px) {
+    .main, .main2 {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 1350px) {
+    body {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .input {
+        width: 450px;
+    }
+
+    .main, .main2 {
+        padding: 45px 50px;
+    }
+
+    .textBox {
+        width: 311px;
+    }
+
+    .submitButton {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 1099px) {
+    .photo {
+        background-image: none;
+        width: 0%;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 510px) {
+    .input {
+        background-color: #191816;
+    }
+
+    .eyeButton {
+        background-color: #191816;
+    }
+    
+    #name {
+        background-color: #191816;
+    }
+}
+
+@media (max-width: 450px) {
+    .input {
+        background-color: #191816;
+    }
+
+    .eyeButton {
+        background-color: #191816;
+    }
+
+    .main {
+        padding: 45px 0px 0px 15px;
+    }
+
+    .main2 {
+        padding: 15px 0px 0px 15px;
+    }
+
+    .input {
+        width: 375px;
+    }
+
+    .submitButton {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        width: 88%;
+        margin-left: 5%;
+    }
+        
+    .submitButton2 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        width: 96.5%;
+    }
+
+    .textBox {
+        margin-bottom: 10px;
+    }
+
+    .eyeButton {
+        left: 85.4%;
+        top: -48px;
+    }
+}
