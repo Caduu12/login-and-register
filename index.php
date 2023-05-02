@@ -1,7 +1,11 @@
 <?php
+session_start();
 
+echo print_r($_SESSION);
 
-$hellophrase = "<h1> Hello! Welcome, Carlos </h1>";
+$name = $_SESSION['name'];
+
+$hellophrase = "<h1> Hello! Welcome, $name </h1>";
 
 ?>
 

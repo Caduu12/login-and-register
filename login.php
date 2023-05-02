@@ -1,4 +1,66 @@
 <?php
+session_start();
+
+function main()
+{
+    if (isset($_POST["email"]) && isset($_POST["password"])) {
+        $useremail = $_POST["email"];
+        $userpassword = $_POST["password"];
+
+        if (!validateMail($useremail)) {
+            echo "Email inválido";
+            return false;
+        }
+
+        if (!validatePassword($userpassword)) {
+            echo "Senha inválida";
+            return false;
+        }
+
+        if (!thisUserExist($useremail, $userpassword)) {
+            echo "Email ou Senha não foram encontrados";
+            return false;
+        }
+
+        header("Location: ./index.php");
+    }
+}
+
+function validateMail($email)
+{
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    return true;
+}
+
+function validatePassword($password)
+{
+    if (empty($password) || !preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/", $password)) {
+        return false;
+    }
+    return true;
+}
+
+function thisUserExist($email, $password)
+{
+    $jsonbody = file_get_contents("usersRegister.json");
+    $filedecoded = json_decode($jsonbody);
+    
+
+    foreach ($filedecoded as $users) {
+        $userEmailListed = $users->usermail;
+        $userPassListed = $users->userpassword;
+        if($userEmailListed == $email && $userPassListed == $password) {
+            $_SESSION["email"] = $email;
+            $_SESSION["pass"] = $password;
+            $_SESSION["name"] = $users->name;
+            
+            return true;
+        }
+    }
+}
+main()
 
 ?>
 
@@ -26,17 +88,15 @@
             <div class="main" id="main">
                 <div id="inputBody">
                     <div class="box1">
-                        <h1 class="title"><img src="./assets/log-in.png" class=""
-                                style="margin-bottom: -4px; margin-right: 5px;">Faça seu login</h1>
+                        <h1 class="title"><img src="./assets/log-in.png" class="" style="margin-bottom: -4px; margin-right: 5px;">Faça seu login</h1>
                         <p class="topText">Entre com suas informações de cadastro.</p>
                     </div>
 
                     <form class="box2" action="./login.php" method="post">
                         <h3 style="margin-bottom: 0;">E-mail</h3>
-                        <input type="email" class="textBox" id="email" placeholder="Digite seu email" required>
+                        <input type="name" class="textBox" id="email" placeholder="Digite seu email" name="email" >
                         <h3 style="margin-bottom: 0;">Senha</h3>
-                        <input type="password" class="textBox" id="password" placeholder="Digite sua senha"
-                            pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$">
+                        <input type="password" class="textBox" id="password" name="password" placeholder="Digite sua senha" >
                         <button class="eyeButton" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')" id="eyeButton1">
                             <img src="./assets/eye.svg" class="eye" id="eye1">
                         </button>
@@ -54,5 +114,6 @@
     <div class="photo"></div>
 </body>
 <script src="./script.js"></script>
+<!-- pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$" -->
 
 </html>

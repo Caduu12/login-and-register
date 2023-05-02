@@ -53,3 +53,7 @@ function showPass(inputID, buttonID, imgID) {
         ButtonId.innerHTML = "<img src='./assets/eye.svg' class='eye' id='eye'></img>";
     }
 }
+
+function submitForm() {
+    console.log("O botão para enviar o form foi apertado");
+}
