@@ -8,62 +8,26 @@ function main()
         $username = $_POST["username"];
         $useremail = $_POST["email"];
         $userpassword = $_POST["password"];
-    
-        if (file_exists("usersRegister.json")) {
-    
-            if (!validateName($username)) {
-                $_SESSION['status'] = "error";
-                $_SESSION['mensagem'] = "Nome invalido";
-    
-                header("Location: login.php");
-                return false;
-            }
-    
-            if (!validateMail($useremail)) {
-                $_SESSION['status'] = "error";
-                $_SESSION['mensagem'] = "E-mail invalido";
-                
-                header("Location: login.php");
-                return false;
-            }
-    
-            if (!validatePassword($userpassword)) {
-                $_SESSION['status'] = "error";
-                $_SESSION['mensagem'] = "E-mail invalido";
-    
-                header("Location: login.php");
-                return false;
-            }
-    
-            $isRegister = createUserInFile($username, $useremail, $userpassword);
-    
-            if (validateMail($useremail) && validateMail($useremail) && validatePassword($userpassword)) {
-                session_unset();
-                header("Location: index.php");
-            }
-        }
-    
+        $userConfirmedPassword = $_POST["confirmPassword"];
+
         if (!file_exists("usersRegister.json")) {
-            createUserFile($username, $useremail, $userpassword);
+            $createFile = fopen("usersRegister.json", "w");
+            fclose($createFile);
+        }
+
+        if (validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
+            $isRegister = createUserInFile($username, $useremail, $userpassword);
+            session_unset();
+            header("Location: ./login.php");
         }
     }
 }
-
-
 
 function createUserInFile($username, $useremail, $userpassword)
 {
     $baseJsonFile = file_get_contents("usersRegister.json");
 
-    $decodedObject = json_decode($baseJsonFile);
-
-
-    // TODO: Descobrir o tipo de dado que retorno $decordedObject
-
-    // TODO: Se for um array, iterar neste array buscar objeto users e comparar cada item, com o $useremail, $userpassword
-
-    // TODO: Dentro do loop identificar se o usuario e senha ja existem, caso existir $_SESSION['status'], $_SESSION['mensagem']
-    // return "erro, usuario ja existente e redirecionar para a tela de cadastro";
+    $decodedObject = json_decode($baseJsonFile) ?? [];
 
     $newUserObject = [
         "name" => $username,
@@ -76,29 +40,42 @@ function createUserInFile($username, $useremail, $userpassword)
     $encodeToJson = json_encode($decodedObject);
 
     $editingFile = fopen("usersRegister.json", "w");
-    echo "Foi escrito";
     fwrite($editingFile, $encodeToJson);
 
     fclose($editingFile);
 }
 
-function createUserFile($username, $useremail, $userpassword)
+function validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
 {
-    $creatingFile = fopen("usersRegister.json", "w");
+    if (!validateName($username)) {
+        $_SESSION['status'] = "error";
+        $_SESSION['mensagem'] = "Nome invalido";
 
-    $jsonBasicFormat = [
-        [
-            "name" => $username,
-            "usermail" => $useremail,
-            "userpassword" => $userpassword
-        ]
-    ];
+        return false;
+    }
 
-    $jsonbody = json_encode($jsonBasicFormat);
+    if (!validateMail($useremail)) {
+        $_SESSION['status'] = "error";
+        $_SESSION['mensagem'] = "E-mail invalido";
 
-    fwrite($creatingFile, $jsonbody);
+        return false;
+    }
 
-    fclose($creatingFile);
+    if (!validatePassword($userpassword)) {
+        $_SESSION['status'] = "error";
+        $_SESSION['mensagem'] = "Senha invalido";
+
+        return false;
+    }
+
+    if (!passwordAreEqual($userpassword, $userConfirmedPassword)) {
+        $_SESSION['status'] = "error";
+        $_SESSION['mensagem'] = "Senhas não são iguais";
+
+        return false;
+    }
+
+    return true;
 }
 
 function validateName($name)
@@ -111,7 +88,7 @@ function validateName($name)
 
 function validateMail($email)
 {
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !thisEmailExist($email)) {
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !thisEmailNotExist($email)) {
         return false;
     }
     return true;
@@ -126,10 +103,13 @@ function validatePassword($password)
 }
 
 
-function thisEmailExist($email)
+function thisEmailNotExist($email)
 {
     $userFile = file_get_contents("usersRegister.json");
     $fileContentDecoded = json_decode($userFile);
+    if (!$fileContentDecoded) {
+        return true;
+    }
 
     foreach ($fileContentDecoded as $user) {
         $otherEmailUsers = $user->usermail;
@@ -138,6 +118,14 @@ function thisEmailExist($email)
         }
     }
     return true;
+}
+
+function passwordAreEqual($password, $confirmedpassword)
+{
+    if ($password == $confirmedpassword) {
+        return true;
+    }
+    return false;
 }
 
 main();
@@ -182,16 +170,16 @@ main();
                         <input type="text" class="textBox" id="name" placeholder="Digite seu nome" name="username">
 
                         <h3 style="margin-bottom: 0; margin-top: -1px;">E-mail</h3>
-                        <input type="text" class="textBox" id="email" placeholder="Digite seu email" name="email">
+                        <input type="email" class="textBox" id="email" placeholder="Digite seu email" name="email">
 
                         <h3 style="margin-bottom: 0; margin-top: -1px;">Senha</h3>
-                        <input type="password" class="textBox" id="password" placeholder="Crie sua senha" name="password">
+                        <input type="password" class="textBox" id="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="password">
                         <button class="eyeButton" id="eyeButton1" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')">
                             <img src="./assets/eye.svg" class="eye" id="eye1">
                         </button>
 
                         <h3 style="margin-bottom: 0; margin-top: -23px;">Confirme a senha</h3>
-                        <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$" name="confirmPassword">
+                        <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="confirmPassword">
                         <button class="eyeButton" id="eyeButton2" type="button" onclick="showPass('password2', 'eyeButton2', 'eye2')">
                             <img src="./assets/eye.svg" class="eye" id="eye2">
                         </button>
@@ -199,8 +187,8 @@ main();
                         <div class="errorBox" id="error"></div>
 
                         <div class="buttonBox">
-                            <input type="submit" value="ENTRAR" class="submitButton2" action="something here!!!">
-                            <a href="./login.html" class="link">Não tem conta conosco? Cadastre-se</a>
+                            <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
+                            <a href="./login.php" class="link">Não tem conta conosco? Cadastre-se</a>
                         </div>
                     </form>
                 </div>
