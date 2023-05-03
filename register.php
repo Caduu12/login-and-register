@@ -49,21 +49,21 @@ function validationTrigger($username, $useremail, $userpassword, $userConfirmedP
 {
     if (!validateName($username)) {
         $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "Nome invalido";
+        $_SESSION['mensagem'] = "Nome inválido";
 
         return false;
     }
 
     if (!validateMail($useremail)) {
         $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "E-mail invalido";
+        $_SESSION['mensagem'] = "E-mail inválido";
 
         return false;
     }
 
     if (!validatePassword($userpassword)) {
         $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "Senha invalido";
+        $_SESSION['mensagem'] = "Senha inválida";
 
         return false;
     }
@@ -155,15 +155,15 @@ main();
             <div class="main2" id="main">
                 <div id="inputBody">
                     <div class="box1">
-                        <?php
-                        if (isset($_SESSION['status']) && $_SESSION['status'] == "error") {
-                            echo '<h1>' . $_SESSION['mensagem'] . '</h1>';
-                        }
-                        ?>
                         <h1 class="title"><img src="./assets/log-in.png" class="" style="margin-bottom: -4px; margin-right: 5px;">Crie sua conta</h1>
                         <p class="topText" style="font-family: 'Roboto';">Entre com suas informações para cadastro.</p>
                     </div>
 
+                    <?php
+                    if (isset($_SESSION['status']) && $_SESSION['status'] == "error") {
+                        echo '<div class="errorBox" id="error">' . $_SESSION['mensagem'] . '</div>';
+                    }
+                    ?>
                     <form class="box2" style="margin-top: -7px;" action="./register.php" method="post">
                         <h3 style="margin-bottom: 0;">Nome</h3>
                         <input type="text" class="textBox" id="name" placeholder="Digite seu nome" name="username">
@@ -183,16 +183,18 @@ main();
                             <img src="./assets/eye.svg" class="eye" id="eye2">
                         </button>
 
-                        <div class="errorBox" id="error"></div>
 
-                        <div class="buttonBox">
-                            <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
-                            <a href="./login.php" class="link">Não tem conta conosco? Cadastre-se</a>
-                        </div>
-                    </form>
+
                 </div>
+
+                <div class="buttonBox">
+                    <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
+                    <a href="./login.php" class="link">Não tem conta conosco? Cadastre-se</a>
+                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <div class="photo"></div>
 </body>
