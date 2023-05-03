@@ -1,16 +1,32 @@
 <?php
+
+if (isset($_POST["logOut"])) {
+    setcookie(session_name(), "", time() - 3600);
+    session_unset();
+    header("Location: ./login.php");
+}
+
 session_start();
 
-echo print_r($_SESSION);
+if (!isset($_SESSION["flag"])) {
+    header("Location: ./login.php");
+}
 
-$name = $_SESSION['name'];
+$userinfo = $_SESSION['userinfo'];
 
-$hellophrase = "<h1> Hello! Welcome, $name </h1>";
+$name = $userinfo["username"];
+
+$nameSeparate = explode(" ", $name);
+
+$firstName = $nameSeparate[0];
+
+$hellophrase = "<h1> Hello! Welcome, $firstName </h1>";
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,17 +34,32 @@ $hellophrase = "<h1> Hello! Welcome, $name </h1>";
     <title>Welcome</title>
     <link rel='stylesheet' href='./style.css'>
     <style>
-        * {
-            background-color: #24221f;
-            position: relative;
+        .content {
             justify-content: center;
+            position: relative;
+        }
+
+        #logout {
+            background-color: #e53300;
+            color: #ff9b7f;
         }
     </style>
 
 
 </head>
+
 <body>
-        <?php echo $hellophrase; ?> 
+    <div class="fullcontent">
+        <a href="./index.php"><img src="./assets/logo.svg" class="logo"></a>
+        <div class="main">
+            <?php echo $hellophrase; ?>
+
+            <form action="index.php" method="post">
+                <input type="submit" name="logOut" value="Fazer LogOut" id="logout">
+            </form>
+        </div>
+    </div>
 </body>
 <script src='script.js'></script>
+
 </html>

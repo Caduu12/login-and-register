@@ -1,12 +1,12 @@
 
 //Quando o botão para Entrar é apertado
-function ButtonLogOn() {
+function submitForm() {
     const mail = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const password2 = document.getElementById('password2').value;
     const emailPattern = /\S+@\S+\.\S+/;
     let mailTest = emailPattern.test(mail);
-    const passPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     let passTest = passPattern.test(password);
     let passTest2 = passPattern.test(password2);
 
@@ -54,6 +54,3 @@ function showPass(inputID, buttonID, imgID) {
     }
 }
 
-function submitForm() {
-    console.log("O botão para enviar o form foi apertado");
-}

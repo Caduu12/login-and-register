@@ -8,19 +8,21 @@ function main()
         $userpassword = $_POST["password"];
 
         if (!validateMail($useremail)) {
-            echo "Email inválido";
+            //echo "Email inválido";
             return false;
         }
 
         if (!validatePassword($userpassword)) {
-            echo "Senha inválida";
+            //echo "Senha inválida";
             return false;
         }
 
         if (!thisUserExist($useremail, $userpassword)) {
-            echo "Email ou Senha não foram encontrados";
+            //echo "Email ou Senha não foram encontrados";
             return false;
         }
+
+        $_SESSION["flag"] = true;
 
         header("Location: ./index.php");
     }
@@ -46,16 +48,18 @@ function thisUserExist($email, $password)
 {
     $jsonbody = file_get_contents("usersRegister.json");
     $filedecoded = json_decode($jsonbody);
-    
+
 
     foreach ($filedecoded as $users) {
         $userEmailListed = $users->usermail;
         $userPassListed = $users->userpassword;
-        if($userEmailListed == $email && $userPassListed == $password) {
-            $_SESSION["email"] = $email;
-            $_SESSION["pass"] = $password;
-            $_SESSION["name"] = $users->name;
-            
+        if ($userEmailListed == $email && $userPassListed == $password) {
+            $userObject = [
+                "username" => $users->name,
+                "email" => $email
+            ];
+            $_SESSION["userinfo"] = $userObject;
+
             return true;
         }
     }
@@ -94,15 +98,15 @@ main()
 
                     <form class="box2" action="./login.php" method="post">
                         <h3 style="margin-bottom: 0;">E-mail</h3>
-                        <input type="name" class="textBox" id="email" placeholder="Digite seu email" name="email" >
+                        <input type="name" class="textBox" id="email" placeholder="Digite seu email" name="email">
                         <h3 style="margin-bottom: 0;">Senha</h3>
-                        <input type="password" class="textBox" id="password" name="password" placeholder="Digite sua senha" >
+                        <input type="password" class="textBox" id="password" name="password" placeholder="Digite sua senha">
                         <button class="eyeButton" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')" id="eyeButton1">
                             <img src="./assets/eye.svg" class="eye" id="eye1">
                         </button>
                         <div class="errorBox" id="error"></div>
                         <div class="buttonBox">
-                            <input type="submit" value="ENTRAR" class="submitButton">
+                            <input type="submit" value="ENTRAR" class="submitButton" onclick="submitForm()">
                             <a href="./register.php" class="link">Não tem conta conosco? Cadastre-se</a>
                         </div>
                     </form>
