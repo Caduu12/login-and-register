@@ -139,6 +139,7 @@ main();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel='stylesheet' href="./style.css">
+    <link rel="icon" href="assets/logo.svg" type="image/icon type">
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Roboto&display=swap' rel='stylesheet'>
@@ -189,7 +190,7 @@ main();
 
                 <div class="buttonBox">
                     <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
-                    <a href="./login.php" class="link">Não tem conta conosco? Cadastre-se</a>
+                    <a href="./login.php" class="link">Já tem uma conta? Faça o login</a>
                 </div>
                 </form>
             </div>

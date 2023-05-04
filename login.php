@@ -3,6 +3,11 @@ session_start();
 
 function main()
 {
+    if(!file_exists("usersRegister.json")) {
+       echo "<p>Essa conta ainda não existe</p>";
+       echo "<a href='register.php'>Link Link</a>";
+    }
+
     if (isset($_POST["email"]) && isset($_POST["password"])) {
         $useremail = $_POST["email"];
         $userpassword = $_POST["password"];
