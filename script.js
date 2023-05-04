@@ -46,7 +46,7 @@ function showPass(inputID, buttonID, imgID) {
     if (showPassword.type == 'password') {
         showPassword.type = 'text';
         ButtonId.removeChild(ButtonId.firstChild);
-        ButtonId.innerHTML = "<img src='./assets/eyeFocus.svg' class='eye' id='eye'></img>";
+        ButtonId.innerHTML = "<img src='./assets/eye-focus.svg' class='eye' id='eye'></img>";
     } else {
         showPassword.type = 'password';
         ButtonId.removeChild(ButtonId.firstChild);

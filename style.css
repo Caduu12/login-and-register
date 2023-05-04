@@ -124,11 +124,11 @@ p {
 }
 
 #email:focus, #email22:focus {
-    background: url(./assets/mailFocus.svg) no-repeat scroll 7px 13px;
+    background: url(./assets/mail-focus.svg) no-repeat scroll 7px 13px;
 }
 
 #password:focus, #password2:focus {
-    background: url(./assets/lockFocus.svg) no-repeat 7px 13px;
+    background: url(./assets/lock-focus.svg) no-repeat 7px 13px;
 }
 
 #password, #password2 {
