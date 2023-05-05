@@ -1,8 +1,18 @@
 <?php
+
+include './src/validation.php';
+
+include './src/file-management.php';
+
 session_start();
 
 function main()
 {
+
+    $validation = new Validation();
+
+    $fileManagement = new FileManagement();
+
     if (isset($_POST["email"]) && isset($_POST["password"])) {
 
         $username = $_POST["username"];
@@ -10,122 +20,14 @@ function main()
         $userpassword = $_POST["password"];
         $userConfirmedPassword = $_POST["confirmPassword"];
 
-        if (!file_exists("usersRegister.json")) {
-            $createFile = fopen("usersRegister.json", "w");
-            fclose($createFile);
-        }
+        $fileManagement->createFileIfDontExist();
 
-        if (validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
-            createUserInFile($username, $useremail, $userpassword);
+        if ($validation->validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
+            $fileManagement->createUserInFile($username, $useremail, $userpassword);
             session_unset();
             header("Location: ./login.php");
         }
     }
-}
-
-function createUserInFile($username, $useremail, $userpassword)
-{
-    $baseJsonFile = file_get_contents("usersRegister.json");
-
-    $decodedObject = json_decode($baseJsonFile) ?? [];
-
-    $newUserObject = [
-        "name" => $username,
-        "usermail" => $useremail,
-        "userpassword" => $userpassword
-    ];
-
-    array_push($decodedObject, $newUserObject);
-
-    $encodeToJson = json_encode($decodedObject);
-
-    $editingFile = fopen("usersRegister.json", "w");
-    fwrite($editingFile, $encodeToJson);
-
-    fclose($editingFile);
-}
-
-function validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
-{
-    if (!validateName($username)) {
-        $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "Nome inválido";
-
-        return false;
-    }
-
-    if (!validateMail($useremail)) {
-        $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "E-mail inválido";
-
-        return false;
-    }
-
-    if (!validatePassword($userpassword)) {
-        $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "Senha inválida";
-
-        return false;
-    }
-
-    if (!passwordAreEqual($userpassword, $userConfirmedPassword)) {
-        $_SESSION['status'] = "error";
-        $_SESSION['mensagem'] = "Senhas não são iguais";
-
-        return false;
-    }
-
-    return true;
-}
-
-function validateName($name)
-{
-    if (empty($name) || !preg_match("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/", $name)) {
-        return false;
-    }
-    return true;
-}
-
-function validateMail($email)
-{
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !thisEmailNotExist($email)) {
-        return false;
-    }
-    return true;
-}
-
-function validatePassword($password)
-{
-    if (empty($password) || !preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/", $password)) {
-        return false;
-    }
-    return true;
-}
-
-
-function thisEmailNotExist($email)
-{
-    $userFile = file_get_contents("usersRegister.json");
-    $fileContentDecoded = json_decode($userFile);
-    if (!$fileContentDecoded) {
-        return true;
-    }
-
-    foreach ($fileContentDecoded as $user) {
-        $otherEmailUsers = $user->usermail;
-        if ($otherEmailUsers == $email) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function passwordAreEqual($password, $confirmedpassword)
-{
-    if ($password == $confirmedpassword) {
-        return true;
-    }
-    return false;
 }
 
 main();

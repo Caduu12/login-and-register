@@ -1,28 +1,38 @@
 <?php
+
+include './src/file-management.php';
+
+include './src/validation.php';
+
 session_start();
 
 function main()
 {
-    if(!file_exists("usersRegister.json")) {
-       echo "<p>Essa conta ainda não existe</p>";
-       echo "<a href='register.php'>Link Link</a>";
+    $validation = new Validation();
+
+    $fileManagement = new FileManagement();
+
+    if (!$fileManagement->checkIfFileExist()) {
+        header("Location: register.php");
     }
+
+    $fileManagement->isFileArray();
 
     if (isset($_POST["email"]) && isset($_POST["password"])) {
         $useremail = $_POST["email"];
         $userpassword = $_POST["password"];
 
-        if (!validateMail($useremail)) {
+        if (!$validation->validateMail($useremail)) {
             //echo "Email inválido";
             return false;
         }
 
-        if (!validatePassword($userpassword)) {
+        if (!$validation->validatePassword($userpassword)) {
             //echo "Senha inválida";
             return false;
         }
 
-        if (!thisUserExist($useremail, $userpassword)) {
+        if (!$validation->thisUserExist($useremail, $userpassword)) {
             //echo "Email ou Senha não foram encontrados";
             return false;
         }
@@ -49,26 +59,7 @@ function validatePassword($password)
     return true;
 }
 
-function thisUserExist($email, $password)
-{
-    $jsonbody = file_get_contents("usersRegister.json");
-    $filedecoded = json_decode($jsonbody);
 
-
-    foreach ($filedecoded as $users) {
-        $userEmailListed = $users->usermail;
-        $userPassListed = $users->userpassword;
-        if ($userEmailListed == $email && $userPassListed == $password) {
-            $userObject = [
-                "username" => $users->name,
-                "email" => $email
-            ];
-            $_SESSION["userinfo"] = $userObject;
-
-            return true;
-        }
-    }
-}
 main()
 
 ?>
