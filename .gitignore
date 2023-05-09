@@ -2,6 +2,8 @@
 plan.txt
 usersRegister.json
 register.old.php
+.env
+/vendor
 
 # git keys and ssh
 git
