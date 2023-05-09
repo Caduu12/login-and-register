@@ -27,7 +27,7 @@ function main()
             return false;
         }
 
-        if (!$validation->validatePassword($userpassword)) {
+        if (!$validation->isPasswordValid($userpassword)) {
             //echo "Senha inválida";
             return false;
         }
@@ -42,23 +42,6 @@ function main()
         header("Location: ./index.php");
     }
 }
-
-function validateMail($email)
-{
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return false;
-    }
-    return true;
-}
-
-function validatePassword($password)
-{
-    if (empty($password) || !preg_match("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/", $password)) {
-        return false;
-    }
-    return true;
-}
-
 
 main()
 

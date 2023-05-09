@@ -1,31 +1,34 @@
 <?php
 
+require __DIR__ . '/../core.php';
+
 class FileManagement
 {
+
     function checkIfFileExist()
     {
-        if (file_exists("usersRegister")) {
+        if (file_exists($_ENV["REGISTER_FILENAME"])) {
             return true;
         } else {
             return false;
         }
     }
-    
-    function isFileArray() 
-    {
-        $fileContent = file_get_contents("users");
 
-        if (!is_array($fileContent)) {
+    function isFileArray()
+    {
+        $fileContent = file_get_contents($_ENV["REGISTER_FILENAME"]);
+
+        $fileDecoded = json_decode($fileContent);
+
+        if (!is_array($fileDecoded)) {
             header("Location: register.php");
         }
-
-        
     }
 
     function createFileIfDontExist()
     {
-        if (file_exists("usersRegister.json")) {
-            $createFile = fopen("userRegister.json", "w");
+        if (!file_exists($_ENV["REGISTER_FILENAME"])) {
+            $createFile = fopen($_ENV["REGISTER_FILENAME"], "w");
             fclose($createFile);
             return true;
         }
@@ -33,7 +36,7 @@ class FileManagement
 
     function createUserInFile($username, $useremail, $userpassword)
     {
-        $baseJsonFile = file_get_contents("usersRegister.json");
+        $baseJsonFile = file_get_contents($_ENV["REGISTER_FILENAME"]);
 
         $decodedObject = json_decode($baseJsonFile) ?? [];
 
@@ -47,7 +50,7 @@ class FileManagement
 
         $encodeToJson = json_encode($decodedObject);
 
-        $editingFile = fopen("usersRegister.json", "w");
+        $editingFile = fopen($_ENV["REGISTER_FILENAME"], "w");
         fwrite($editingFile, $encodeToJson);
 
         fclose($editingFile);

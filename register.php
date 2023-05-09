@@ -8,7 +8,6 @@ session_start();
 
 function main()
 {
-
     $validation = new Validation();
 
     $fileManagement = new FileManagement();
@@ -25,7 +24,7 @@ function main()
         if ($validation->validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
             $fileManagement->createUserInFile($username, $useremail, $userpassword);
             session_unset();
-            header("Location: ./login.php");
+            header("Location: login.php");
         }
     }
 }
@@ -48,6 +47,7 @@ main();
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -85,11 +85,7 @@ main();
                         <button class="eyeButton" id="eyeButton2" type="button" onclick="showPass('password2', 'eyeButton2', 'eye2')">
                             <img src="./assets/eye.svg" class="eye" id="eye2">
                         </button>
-
-
-
                 </div>
-
                 <div class="buttonBox">
                     <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
                     <a href="./login.php" class="link">Já tem uma conta? Faça o login</a>
@@ -101,7 +97,11 @@ main();
     </div>
     <div class="photo"></div>
 </body>
-<script src="script.js"></script>
+<script type="text/javascript">
+    if($('#error').is(':visible')) {
+        alert('Erroroooou!');
+    }
+</script>
 <!-- pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$" -->
 
 </html>

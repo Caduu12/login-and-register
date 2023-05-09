@@ -51,7 +51,7 @@ $hellophrase = "<h1> Hello! Welcome, $firstName </h1>";
 <body>
     <div class="fullcontent">
         <a href="./index.php"><img src="./assets/logo.svg" class="logo"></a>
-        <div class="main">
+        <div class="main" onclick="sessionEdit()">
             <?php echo $hellophrase; ?>
 
             <form action="index.php" method="post">
@@ -60,6 +60,8 @@ $hellophrase = "<h1> Hello! Welcome, $firstName </h1>";
         </div>
     </div>
 </body>
-<script src='script.js'></script>
+<script src='script.js'>
+    
+</script>
 
 </html>
