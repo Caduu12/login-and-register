@@ -11,31 +11,32 @@ function submitForm() {
     let passTest2 = passPattern.test(password2);
 
     if (mail == "" || mailTest == false) {
-        errorConfig('error122', 'Por favor, coloque um email válido');
         return false
-    } else {
-        document.getElementById('error122').style.display = 'none';
     }
 
     if (password == "" || passTest == false) {
-        errorConfig('error122', 'Por favor, coloque uma senha válida');
         return false
-    } else {
-        document.getElementById('error122').style.display = 'none';
     }
 
     if (password != password2 || passTest2 == false) {
-        errorConfig('error122', 'Coloque senhas iguais');
         return false
-    } else {
-        document.getElementById('error122').style.display = 'none';
     }
     
 }
 
-function errorConfig(idOfInput, message) {
-    document.getElementById(idOfInput).style.display = 'block';
-    document.getElementById(idOfInput).innerText = message;
+function changeTable(action) {
+    let table1 = document.getElementById("table1").style;
+    let table2 = document.getElementById("table2").style;
+
+    if (action == "goAhead") {
+        table1.display = 'none';
+        table2.display = 'block';
+    }
+
+    if (action == "goBack") { 
+        table1.display = 'block';
+        table2.display = 'none';
+    }
 }
 
 //Função para fazer a senha visivel

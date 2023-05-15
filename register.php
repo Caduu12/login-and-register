@@ -68,30 +68,40 @@ main();
                         echo '<div class="errorBox" id="error">' . $errorMessage . '</div>';
                     }
                     ?>
-                    <form class="box2" style="margin-top: -7px;" action="./register.php" method="post">
-                        <h3 style="margin-bottom: 0;">Nome</h3>
-                        <input type="text" class="textBox" id="name" placeholder="Digite seu nome" name="username">
+                    <form class="box2" style="margin-top: 3px;" action="./register.php" method="post">
+                        <div id="table1">
+                            <h3 style="margin-bottom: 0;">Nome</h3>
+                            <input type="text" class="textBox" id="name" placeholder="Digite seu nome" name="username">
 
-                        <h3 style="margin-bottom: 0; margin-top: -1px;">E-mail</h3>
-                        <input type="email" class="textBox" id="email" placeholder="Digite seu email" name="email">
+                            <h3 style="margin-bottom: 0; margin-top: -1px;">E-mail</h3>
+                            <input type="email" class="textBox" id="email" placeholder="Digite seu email" name="email">
+                            <div class="buttonBox">
+                                <input type="button" value="Continuar" class="submitButton2" onclick="changeTable('goAhead')">
+                                <a href="./login.php" class="link">Já tem uma conta? Faça o login</a>
+                            </div>
+                        </div>
 
-                        <h3 style="margin-bottom: 0; margin-top: -1px;">Senha</h3>
-                        <input type="password" class="textBox" id="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="password">
-                        <button class="eyeButton" id="eyeButton1" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')">
-                            <img src="./assets/eye.svg" class="eye" id="eye1">
-                        </button>
+                        <div id="table2" style="display: none;">
+                            <input type="button" value="Voltar" onclick="changeTable('goBack')">
 
-                        <h3 style="margin-bottom: 0; margin-top: -23px;">Confirme a senha</h3>
-                        <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="confirmPassword">
-                        <button class="eyeButton" id="eyeButton2" type="button" onclick="showPass('password2', 'eyeButton2', 'eye2')">
-                            <img src="./assets/eye.svg" class="eye" id="eye2">
-                        </button>
+                            <h3 style="margin-bottom: 0; margin-top: -1px;">Senha</h3>
+                            <input type="password" class="textBox" id="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="password">
+                            <button class="eyeButton" id="eyeButton1" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')">
+                                <img src="./assets/eye.svg" class="eye" id="eye1">
+                            </button>
+
+                            <h3 style="margin-bottom: 0; margin-top: -23px;">Confirme a senha</h3>
+                            <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="confirmPassword">
+                            <button class="eyeButton" id="eyeButton2" type="button" onclick="showPass('password2', 'eyeButton2', 'eye2')">
+                                <img src="./assets/eye.svg" class="eye" id="eye2">
+                            </button>
+                            <div class="buttonBox">
+                                <input type="submit" value="CADASTRAR" class="submitButton2" onclick="changeTable('goAhead')">
+                                <a href="./login.php" class="link">Já tem uma conta? Faça o login</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="buttonBox">
-                    <input type="submit" value="CADASTRAR" class="submitButton2" onclick="submitForm()">
-                    <a href="./login.php" class="link">Já tem uma conta? Faça o login</a>
-                </div>
-                </form>
             </div>
         </div>
     </div>
