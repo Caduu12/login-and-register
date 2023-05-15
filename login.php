@@ -4,6 +4,8 @@ include './src/file-management.php';
 
 include './src/validation.php';
 
+require './core.php';
+
 session_start();
 
 function main()
@@ -18,29 +20,16 @@ function main()
 
     $fileManagement->isFileArray();
 
+
     if (isset($_POST["email"]) && isset($_POST["password"])) {
-        $useremail = $_POST["email"];
-        $userpassword = $_POST["password"];
-
-        if (!$validation->validateMail($useremail)) {
-            //echo "Email inválido";
-            return false;
-        }
-
-        if (!$validation->isPasswordValid($userpassword)) {
-            //echo "Senha inválida";
-            return false;
-        }
-
-        if (!$validation->thisUserExist($useremail, $userpassword)) {
-            //echo "Email ou Senha não foram encontrados";
-            return false;
-        }
-
-        $_SESSION["flag"] = true;
-
+        $validation->logInValidationTrigger($_POST["email"], $_POST["password"]);
+    }
+    
+    if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {
         header("Location: ./index.php");
     }
+    
+
 }
 
 main()
@@ -74,7 +63,11 @@ main()
                         <h1 class="title"><img src="./assets/log-in.png" class="" style="margin-bottom: -4px; margin-right: 5px;">Faça seu login</h1>
                         <p class="topText">Entre com suas informações de cadastro.</p>
                     </div>
-
+                    <?php
+                    if ($errorMessage = getSessionFlashError()) {
+                        echo '<div class="errorBox" id="error">' . $errorMessage . '</div>';
+                    }
+                    ?>
                     <form class="box2" action="./login.php" method="post">
                         <h3 style="margin-bottom: 0;">E-mail</h3>
                         <input type="name" class="textBox" id="email" placeholder="Digite seu email" name="email">
@@ -83,7 +76,6 @@ main()
                         <button class="eyeButton" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')" id="eyeButton1">
                             <img src="./assets/eye.svg" class="eye" id="eye1">
                         </button>
-                        <div class="errorBox" id="error"></div>
                         <div class="buttonBox">
                             <input type="submit" value="ENTRAR" class="submitButton" onclick="submitForm()">
                             <a href="./register.php" class="link">Não tem conta conosco? Cadastre-se</a>

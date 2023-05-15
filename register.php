@@ -4,6 +4,8 @@ include './src/validation.php';
 
 include './src/file-management.php';
 
+require './core.php';
+
 session_start();
 
 function main()
@@ -21,7 +23,7 @@ function main()
 
         $fileManagement->createFileIfDontExist();
 
-        if ($validation->validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
+        if ($validation->registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
             $fileManagement->createUserInFile($username, $useremail, $userpassword);
             session_unset();
             header("Location: login.php");
@@ -47,7 +49,6 @@ main();
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -55,7 +56,7 @@ main();
     <div class="content">
         <a href="./index.php"><img src="./assets/logo.svg" class="logo"></a>
         <div class="input">
-            <div class="main2" id="main">
+            <div class="main" id="main">
                 <div id="inputBody">
                     <div class="box1">
                         <h1 class="title"><img src="./assets/log-in.png" class="" style="margin-bottom: -4px; margin-right: 5px;">Crie sua conta</h1>
@@ -63,8 +64,8 @@ main();
                     </div>
 
                     <?php
-                    if (isset($_SESSION['status']) && $_SESSION['status'] == "error") {
-                        echo '<div class="errorBox" id="error">' . $_SESSION['mensagem'] . '</div>';
+                    if ($errorMessage = getSessionFlashError()) {
+                        echo '<div class="errorBox" id="error">' . $errorMessage . '</div>';
                     }
                     ?>
                     <form class="box2" style="margin-top: -7px;" action="./register.php" method="post">
@@ -97,11 +98,6 @@ main();
     </div>
     <div class="photo"></div>
 </body>
-<script type="text/javascript">
-    if($('#error').is(':visible')) {
-        alert('Erroroooou!');
-    }
-</script>
-<!-- pattern="^(?=.*[0-9].*)(?=.*[a-zA-Z])(?!.*\s)[0-9a-zA-Z*$-+?_&=!%{}/'.]*$" -->
+<script src="./script.js"></script>
 
 </html>

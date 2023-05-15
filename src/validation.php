@@ -4,37 +4,55 @@ require __DIR__ . '/../core.php';
 
 class Validation
 {
-    function validationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
+    function registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
     {
         if (!$this->isNameValid($username)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "Nome inválido";
-
+            $errorMessage = "Nome inválido";    
+            setSessionFlashError($errorMessage);
             return false;
         }
 
         if (!$this->isEmailValid($useremail)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "E-mail inválido";
-
+            $errorMessage = "Email inválido";    
+            setSessionFlashError($errorMessage);
             return false;
         }
 
         if (!$this->isPasswordValid($userpassword)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "Senha inválida";
-
+            $errorMessage = "Senha inválida";
+            setSessionFlashError($errorMessage);
             return false;
         }
 
         if (!$this->passwordAreEqual($userpassword, $userConfirmedPassword)) {
-            $_SESSION['status'] = "error";
-            $_SESSION['mensagem'] = "Senhas não são iguais";
-
+            $errorMessage = "Senhas não são iguais";
+            setSessionFlashError($errorMessage);
             return false;
         }
 
         return true;
+    }
+
+    function logInValidationTrigger($userEmail, $userPassword) {    
+            if (!$this->validateMail($userEmail)) {
+                $errorMessage = "E-mail inválido";
+                setSessionFlashError($errorMessage);
+                return false;
+            }
+    
+            if (!$this->isPasswordValid($userPassword)) {
+                $errorMessage = "Senha inválida";
+                setSessionFlashError($errorMessage);
+                return false;
+            }
+    
+            if (!$this->thisUserExist($userEmail, $userPassword)) {
+                $errorMessage = "Email ou Senha incorretos";
+                setSessionFlashError($errorMessage);
+                return false;
+            }
+
+            $_SESSION["flag"] = true;
     }
 
     function isNameValid($name)

@@ -68,7 +68,7 @@ p {
 
 .input {
     background-color: #24221F;
-    height: 572px;
+    height: auto;
     width: 572px;
     margin: auto;
     margin-top: 30px;
@@ -76,7 +76,7 @@ p {
 }
 
 .main {
-    padding: 55px 119px 15px 119px;
+    padding: 55px 119px 55px 119px;
     display: block;
 }
 
@@ -240,119 +240,124 @@ table, th, td {
             /* Daqui pra baixo só eh pra responsividade!!!! */
 
 
-
-
-@media (min-height: 850px) {
-    .main, .main2 {
-        margin-top: 70px;
-    }
-}
-
-@media (max-width: 1350px) {
-    body {
-        width: 100%;
+    @media (min-height: 850px) {
+        .main, .main2 {
+            margin-top: 70px;
+        }  
     }
 
-    h1 {
-        font-size: 20px;
+    @media (max-width: 1350px) {
+        body {
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .input {
+            width: 450px;
+        }
+
+        .main, .main2 {
+            padding: 45px 50px;
+        }
+
+        .textBox {
+            width: 311px;
+        }
+
+        .submitButton {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            width: 90%;
+            margin-left: 5%;
+        }
     }
 
-    h3 {
-        font-size: 14px;
+        /* Medias a partir de 1099px */  
+
+        @media (max-width: 1099px) {
+            .photo {
+                background-image: none;
+                width: 0%;
+        }
+
+        .content {
+            width: 100%;
+        }
     }
 
-    p {
-        font-size: 14px;
-    }
+        /* Medias a partir de 510px */  
 
-    .input {
-        width: 450px;
-    }
+        @media (max-width: 510px) {
+            .input {
+                background-color: #191816;
+            }
 
-    .main, .main2 {
-        padding: 45px 50px;
-    }
-
-    .textBox {
-        width: 311px;
-    }
-
-    .submitButton {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 15px;
-        width: 90%;
-        margin-left: 5%;
-    }
-}
-
-@media (max-width: 1099px) {
-    .photo {
-        background-image: none;
-        width: 0%;
-    }
-
-    .content {
-        width: 100%;
-    }
-}
-
-@media (max-width: 510px) {
-    .input {
-        background-color: #191816;
-    }
-
-    .eyeButton {
-        background-color: #191816;
-    }
+            .eyeButton {
+                background-color: #191816;
+            }
     
-    #name {
-        background-color: #191816;
-    }
-}
-
-@media (max-width: 450px) {
-    .input {
-        background-color: #191816;
+            #name {
+                background-color: #191816;
+            }
     }
 
-    .eyeButton {
-        background-color: #191816;
-    }
+        /* Medias a partir de 450px */
 
-    .main {
-        padding: 45px 0px 0px 15px;
-    }
+        @media (max-width: 450px) {
+            .input {
+                background-color: #191816;
+        }
 
-    .main2 {
-        padding: 15px 0px 0px 15px;
-    }
+        .eyeButton {
+            background-color: #191816;
+        }
 
-    .input {
-        width: 375px;
-    }
+        .main {
+            padding: 45px 0px 0px 15px;
+        }
 
-    .submitButton {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        font-size: 14px;
-        width: 88%;
-        margin-left: 5%;
-    }
+        .main2 {
+            padding: 15px 0px 0px 15px;
+        }
+
+        .input {
+            width: 350px;
+        }
+
+        .submitButton {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            width: 88%;
+            margin-left: 5%;
+        }
         
-    .submitButton2 {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        font-size: 14px;
-        width: 96.5%;
-    }
+        .submitButton2 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
 
-    .textBox {
-        margin-bottom: 10px;
-    }
+        .textBox {
+            margin-bottom: 10px;
+            width: 296.2px;
+        }
 
-    .eyeButton {
-        left: 85.4%;
-        top: -48px;
+        .eyeButton {
+            left: 85.4%;
+            top: -48px;
+        }
     }
-}
