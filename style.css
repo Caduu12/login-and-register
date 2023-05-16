@@ -236,6 +236,11 @@ table, th, td {
     display: none;
 }
 
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #22241f inset !important;
+    -webkit-text-fill-color: #afb6c2 !important;
+}
+
 
             /* Daqui pra baixo só eh pra responsividade!!!! */
 
@@ -286,7 +291,7 @@ table, th, td {
 
         /* Medias a partir de 1099px */  
 
-        @media (max-width: 1099px) {
+    @media (max-width: 1099px) {
             .photo {
                 background-image: none;
                 width: 0%;
@@ -299,7 +304,7 @@ table, th, td {
 
         /* Medias a partir de 510px */  
 
-        @media (max-width: 510px) {
+    @media (max-width: 510px) {
             .input {
                 background-color: #191816;
             }
@@ -315,7 +320,7 @@ table, th, td {
 
         /* Medias a partir de 450px */
 
-        @media (max-width: 450px) {
+    @media (max-width: 450px) {
             .input {
                 background-color: #191816;
         }

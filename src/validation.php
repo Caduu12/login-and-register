@@ -7,13 +7,13 @@ class Validation
     function registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
     {
         if (!$this->isNameValid($username)) {
-            $errorMessage = "Nome inválido";    
+            $errorMessage = "Nome inválido";
             setSessionFlashError($errorMessage);
             return false;
         }
 
         if (!$this->isEmailValid($useremail)) {
-            $errorMessage = "Email inválido";    
+            $errorMessage = "Email inválido";
             setSessionFlashError($errorMessage);
             return false;
         }
@@ -33,26 +33,27 @@ class Validation
         return true;
     }
 
-    function logInValidationTrigger($userEmail, $userPassword) {    
-            if (!$this->validateMail($userEmail)) {
-                $errorMessage = "E-mail inválido";
-                setSessionFlashError($errorMessage);
-                return false;
-            }
-    
-            if (!$this->isPasswordValid($userPassword)) {
-                $errorMessage = "Senha inválida";
-                setSessionFlashError($errorMessage);
-                return false;
-            }
-    
-            if (!$this->thisUserExist($userEmail, $userPassword)) {
-                $errorMessage = "Email ou Senha incorretos";
-                setSessionFlashError($errorMessage);
-                return false;
-            }
+    function logInValidationTrigger($userEmail, $userPassword)
+    {
+        if (!$this->validateMail($userEmail)) {
+            $errorMessage = "E-mail inválido";
+            setSessionFlashError($errorMessage);
+            return false;
+        }
 
-            $_SESSION["flag"] = true;
+        if (!$this->isPasswordValid($userPassword)) {
+            $errorMessage = "Senha inválida";
+            setSessionFlashError($errorMessage);
+            return false;
+        }
+
+        if (!$this->thisUserExist($userEmail, $userPassword)) {
+            $errorMessage = "Email ou Senha incorretos";
+            setSessionFlashError($errorMessage);
+            return false;
+        }
+
+        $_SESSION["flag"] = true;
     }
 
     function isNameValid($name)
@@ -124,7 +125,7 @@ class Validation
         foreach ($filedecoded as $users) {
             $userEmailListed = $users->usermail;
             $userPassListed = $users->userpassword;
-            if ($userEmailListed == $email && $userPassListed == $password) {
+            if (strcasecmp($email, $userEmailListed) == 0 && $userPassListed == $password) {
                 $userObject = [
                     "username" => $users->name,
                     "email" => $email
