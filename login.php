@@ -1,10 +1,13 @@
 <?php
 
+include './models/user.php';
+
 include './src/file-management.php';
 
 include './src/validation.php';
 
 require './core.php';
+
 
 session_start();
 
@@ -28,7 +31,13 @@ function main()
     if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {
         header("Location: ./index.php");
     }
-    
+
+    $user = new User();
+
+    // $users = $user->delete("name", "'marco'");
+    echo "<pre>";
+    print_r($user->select("*"));
+    die();
 
 }
 

@@ -237,10 +237,9 @@ table, th, td {
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #22241f inset !important;
+    -webkit-box-shadow: 0 0 0 30px #24221f inset !important;
     -webkit-text-fill-color: #afb6c2 !important;
 }
-
 
             /* Daqui pra baixo só eh pra responsividade!!!! */
 

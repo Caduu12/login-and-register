@@ -76,13 +76,13 @@ main();
                         <input type="email" class="textBox" id="email" placeholder="Digite seu email" name="email">
 
                         <h3 style="margin-bottom: 0; margin-top: -1px;">Senha</h3>
-                        <input type="password" class="textBox" id="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="password">
+                        <input type="password" class="textBox" id="password" placeholder="Crie sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="password"> 
                         <button class="eyeButton" id="eyeButton1" type="button" onclick="showPass('password', 'eyeButton1', 'eye1')">
                             <img src="./assets/eye.svg" class="eye" id="eye1">
                         </button>
 
                         <h3 style="margin-bottom: 0; margin-top: -23px;">Confirme a senha</h3>
-                        <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" name="confirmPassword">
+                        <input type="password" class="textBox" id="password2" placeholder="Confirme sua senha" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"  name="confirmPassword">
                         <button class="eyeButton" id="eyeButton2" type="button" onclick="showPass('password2', 'eyeButton2', 'eye2')">
                             <img src="./assets/eye.svg" class="eye" id="eye2">
                         </button>

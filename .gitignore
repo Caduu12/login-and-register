@@ -4,6 +4,7 @@ usersRegister.json
 register.old.php
 .env
 /vendor
+.sqlite
 
 # git keys and ssh
 git

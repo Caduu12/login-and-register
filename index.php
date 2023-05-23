@@ -16,6 +16,8 @@ $userinfo = $_SESSION['userinfo'];
 
 $name = $userinfo["username"];
 
+$email = $userinfo["email"];
+
 $nameSeparate = explode(" ", $name);
 
 $firstName = $nameSeparate[0];
@@ -51,8 +53,10 @@ $hellophrase = "<h1> Hello! Welcome, $firstName </h1>";
 <body>
     <div class="fullcontent">
         <a href="./index.php"><img src="./assets/logo.svg" class="logo"></a>
-        <div class="main" onclick="sessionEdit()">
+        <div class="main">
             <?php echo $hellophrase; ?>
+
+            <h3><?php echo $email;?></h3>
 
             <form action="index.php" method="post">
                 <input type="submit" name="logOut" value="Fazer LogOut" id="logout">

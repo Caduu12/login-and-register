@@ -90,7 +90,7 @@ class Validation
 
         foreach ($fileContentDecoded as $user) {
             $otherEmailUsers = $user->usermail;
-            if ($otherEmailUsers == $email) {
+            if (strcasecmp($email, $otherEmailUsers) == 0) {
                 return false;
             }
         }
