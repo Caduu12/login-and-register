@@ -13,36 +13,77 @@ class Database
         $database = 'teste_developer';
         $host = '127.0.0.1';
 
-        $this->conn = new \PDO('mysql:host'.$host.'=;dbname='.$database, $username, $password);
+        $this->conn = new \PDO('mysql:host' . $host . '=;dbname=' . $database, $username, $password);
         $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $this->conn;
     }
 
-    public function select($argSelect = '*')
+    public function select($attrArray = null, $argSelect = '*')
     {
-        return $this->conn->query("SELECT ". $argSelect ." FROM " . $this->tableName)->fetchAll();
+        if (isset($attrArray)) {
+            $attrNames = array_keys($attrArray);
+            $arrayLength = count($attrArray) - 1;
+            $attributes = "";
+
+            for ($x = 0; $x <= $arrayLength; ++$x) {
+
+                $condition = " WHERE ";
+                if ($x >= 1) {
+                    $condition = " AND ";
+                }
+                $attributes .= $condition . $attrNames[$x] . " = " . "'" . $attrArray[$attrNames[$x]] . "'";
+            }
+            return $this->conn->query("SELECT " . $argSelect . " FROM " . $this->tableName . $attributes)->fetchAll();
+        }
+
+        return $this->conn->query("SELECT " . $argSelect . " FROM " . $this->tableName)->fetchAll();
     }
 
-    public function selectOne($argSelectOne = '*', $attrSelectOne, $valueSelectOne)
+    public function selectOne($arraySelectOne, $argSelectOne = '*')
     {
-        return $this->conn->query("SELECT ". $argSelectOne ." FROM " . $this->tableName . " WHERE " . $attrSelectOne . " = '" . $valueSelectOne ."' LIMIT 1")->fetchAll();
+        $attributes = "";
+        $attrNames = array_keys($arraySelectOne);
+        $arrayIndexes = count($arraySelectOne) - 1;
 
+        for ($x = 0; $x <= $arrayIndexes; ++$x) {
+            if ($x >= 1 ) {
+                $attributes .= " AND ";
+            } 
+
+            $attributes .= "`" . $attrNames[$x] . "` = '" . $arraySelectOne[$attrNames[$x]] . "'";
+        }
+
+        return $this->conn->query("SELECT " . $argSelectOne . " FROM " . $this->tableName . " WHERE " . $attributes . " LIMIT 1")->fetchAll();
     }
 
-    public function insert($tableAttr, $attrValues)
+    public function insert($attrValues)
     {
-        return $this->conn->query("INSERT INTO " . $this->tableName . " ( " . $tableAttr . " ) " . $tableAttr . " VALUES (" . $attrValues .  ")")->fetchAll();
+        $attrNames = array_keys($attrValues);
+        $arrayIndex = count($attrValues) - 1;
+        $tableAttr = "";
+        $values = "";
+
+        for ($x = 0; $x <= $arrayIndex; ++$x) {
+            $tableAttr .= " `" . $attrNames[$x] . "`";
+
+            $values .= " '" . $attrValues[$attrNames[$x]] . "'";
+            
+            if ($x < $arrayIndex) {
+                $tableAttr .= ",";
+                $values .= ",";
+            }
+        }
+        return $this->conn->query("INSERT INTO " . $this->tableName . " ( " . $tableAttr . " ) VALUES (" . $values .  ")")->fetchAll();
     }
 
-    public function update($valueToUpdate, $valueToComparate)
+    public function update($attrToUpdate, $valueUpdated, $attrCompared, $valueCompared)
     {
-        return $this->conn->query("UPDATE " . $this->tableName . " SET " . $valueToUpdate . " WHERE " . $valueToComparate);
+        return $this->conn->query("UPDATE " . $this->tableName . " SET " . $attrToUpdate . " = " . $valueUpdated . " WHERE " . $attrCompared . " = " . $valueCompared);
     }
 
-    public function delete($attrDelete, $valueDelete)
+    public function delete($attrDelete = "id", $valueDelete)
     {
         return $this->conn->query("DELETE FROM " . $this->tableName . " WHERE " . $attrDelete . " = " . $valueDelete);
     }
-
 }

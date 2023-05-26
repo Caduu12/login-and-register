@@ -15,15 +15,6 @@ function main()
 {
     $validation = new Validation();
 
-    $fileManagement = new FileManagement();
-
-    if (!$fileManagement->checkIfFileExist()) {
-        header("Location: register.php");
-    }
-
-    $fileManagement->isFileArray();
-
-
     if (isset($_POST["email"]) && isset($_POST["password"])) {
         $validation->logInValidationTrigger($_POST["email"], $_POST["password"]);
     }
@@ -31,13 +22,6 @@ function main()
     if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {
         header("Location: ./index.php");
     }
-
-    $user = new User();
-
-    // $users = $user->delete("name", "'marco'");
-    echo "<pre>";
-    print_r($user->select("*"));
-    die();
 
 }
 

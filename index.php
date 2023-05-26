@@ -1,5 +1,7 @@
 <?php
 
+require './core.php';
+
 if (isset($_POST["logOut"])) {
     setcookie(session_name(), "", time() - 3600);
     session_unset();
@@ -14,7 +16,7 @@ if (!isset($_SESSION["flag"])) {
 
 $userinfo = $_SESSION['userinfo'];
 
-$name = $userinfo["username"];
+$name = $userinfo["name"];
 
 $email = $userinfo["email"];
 

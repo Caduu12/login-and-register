@@ -1,5 +1,7 @@
 <?php
 
+include './models/user.php';
+
 include './src/validation.php';
 
 include './src/file-management.php';
@@ -14,6 +16,8 @@ function main()
 
     $fileManagement = new FileManagement();
 
+    $user = new User();
+
     if (isset($_POST["email"]) && isset($_POST["password"])) {
 
         $username = $_POST["username"];
@@ -24,7 +28,7 @@ function main()
         $fileManagement->createFileIfDontExist();
 
         if ($validation->registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
-            $fileManagement->createUserInFile($username, $useremail, $userpassword);
+            $creatingUser = $user->insert(array('name' => $username, 'email' => $useremail, 'password' => $userpassword));
             session_unset();
             header("Location: login.php");
         }

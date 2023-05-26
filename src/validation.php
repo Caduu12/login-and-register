@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . '/../core.php';
-
 class Validation
 {
     function registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)
@@ -82,18 +80,14 @@ class Validation
 
     function thisEmailNotExist($email)
     {
-        $userFile = file_get_contents($_ENV["REGISTER_FILENAME"]);
-        $fileContentDecoded = json_decode($userFile);
-        if (!$fileContentDecoded) {
-            return true;
+        $user = new User();
+
+        $selectEmails = $user->select("*", Array("`email`" => $email ));
+
+        if (!empty($selectEmails)) {
+            return false;
         }
 
-        foreach ($fileContentDecoded as $user) {
-            $otherEmailUsers = $user->usermail;
-            if (strcasecmp($email, $otherEmailUsers) == 0) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -118,22 +112,16 @@ class Validation
 
     function thisUserExist($email, $password)
     {
-        $jsonbody = file_get_contents($_ENV["REGISTER_FILENAME"]);
-        $filedecoded = json_decode($jsonbody);
+        $user = new User();
 
+        $queryResult = $user->select('`id`, `name`, `email`', array( "`email`" => $email, "`password`" => $password ));
 
-        foreach ($filedecoded as $users) {
-            $userEmailListed = $users->usermail;
-            $userPassListed = $users->userpassword;
-            if (strcasecmp($email, $userEmailListed) == 0 && $userPassListed == $password) {
-                $userObject = [
-                    "username" => $users->name,
-                    "email" => $email
-                ];
-                $_SESSION["userinfo"] = $userObject;
-
-                return true;
-            }
+        if (empty($queryResult)) {
+            return false;
         }
+
+        $_SESSION["userinfo"] = $queryResult[0];
+
+        return true;
     }
 }
