@@ -16,7 +16,8 @@ function main()
     $validation = new Validation();
 
     if (isset($_POST["email"]) && isset($_POST["password"])) {
-        $validation->logInValidationTrigger($_POST["email"], $_POST["password"]);
+        $useremail = strtolower($_POST["email"]);
+        $validation->logInValidationTrigger($useremail, $_POST["password"]);
     }
     
     if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {

@@ -82,7 +82,7 @@ class Validation
     {
         $user = new User();
 
-        $selectEmails = $user->select("*", Array("`email`" => $email ));
+        $selectEmails = $user->select(Array("`email`" => $email, "*" ));
 
         if (!empty($selectEmails)) {
             return false;
@@ -114,7 +114,7 @@ class Validation
     {
         $user = new User();
 
-        $queryResult = $user->select('`id`, `name`, `email`', array( "`email`" => $email, "`password`" => $password ));
+        $queryResult = $user->select( array( "`email`" => $email, "`password`" => $password ), '`id`, `name`, `email`');
 
         if (empty($queryResult)) {
             return false;

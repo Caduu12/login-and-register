@@ -4,8 +4,6 @@ include './models/user.php';
 
 include './src/validation.php';
 
-include './src/file-management.php';
-
 require './core.php';
 
 session_start();
@@ -14,18 +12,14 @@ function main()
 {
     $validation = new Validation();
 
-    $fileManagement = new FileManagement();
-
     $user = new User();
 
     if (isset($_POST["email"]) && isset($_POST["password"])) {
 
         $username = $_POST["username"];
-        $useremail = $_POST["email"];
+        $useremail = strtolower($_POST["email"]);
         $userpassword = $_POST["password"];
         $userConfirmedPassword = $_POST["confirmPassword"];
-
-        $fileManagement->createFileIfDontExist();
 
         if ($validation->registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
             $creatingUser = $user->insert(array('name' => $username, 'email' => $useremail, 'password' => $userpassword));
