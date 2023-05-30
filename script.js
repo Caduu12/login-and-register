@@ -38,6 +38,20 @@ function errorConfig(idOfInput, message) {
     document.getElementById(idOfInput).innerText = message;
 }
 
+function OpenAndCloseDivs(id1, id2, action) {
+    let divBody = document.getElementById('configuration');
+    if (action == "open") {
+        // divBody.style.display = "block";
+        document.getElementById(id1).style.display = 'none';
+        document.getElementById(id2).style.display = 'flex';
+    }
+
+    if (action == "close") {
+        document.getElementById(id1).style.display = 'flex';
+        document.getElementById(id2).style.display = 'none';
+    }
+}
+
 //Função para fazer a senha visivel
 function showPass(inputID, buttonID, imgID) {
     let showPassword = document.getElementById(inputID);

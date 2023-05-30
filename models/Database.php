@@ -77,8 +77,9 @@ class Database
         return $this->conn->query("INSERT INTO " . $this->tableName . " ( " . $tableAttr . " ) VALUES (" . $values .  ")")->fetchAll();
     }
 
-    public function update($attrToUpdate, $valueUpdated, $attrCompared, $valueCompared)
+    public function update($valuesToUpdate, $attrCompared)
     {
+        
         return $this->conn->query("UPDATE " . $this->tableName . " SET " . $attrToUpdate . " = " . $valueUpdated . " WHERE " . $attrCompared . " = " . $valueCompared);
     }
 

@@ -2,10 +2,16 @@
 
 require './core.php';
 
+include 'src/userConfig.php';
+
+$userConfig = new Userconfiguration();
+
 if (isset($_POST["logOut"])) {
-    setcookie(session_name(), "", time() - 3600);
-    session_unset();
-    header("Location: ./login.php");
+    $userConfig->endSession(true, "./login.php");
+}
+
+if (isset($_POST["change"])) {
+    $user->changeUserInfo();
 }
 
 session_start();
@@ -58,16 +64,23 @@ $hellophrase = "<h1> Hello! Welcome, $firstName </h1>";
         <div class="main">
             <?php echo $hellophrase; ?>
 
-            <h3><?php echo $email;?></h3>
+            <h3><?php echo $email; ?></h3>
 
-            <form action="index.php" method="post">
-                <input type="submit" name="logOut" value="Fazer LogOut" id="logout">
-            </form>
+            <button class="configButton" onclick="OpenAndCloseDivs( 'configButton', 'configuration', 'open')" id="configButton">Configuração</button>
+
+            <div class="config" id="configuration">
+                <button class="exit" onclick="OpenAndCloseDivs('configButton', 'configuration', 'close')">X</button>
+                <div id="config-button-area">
+                    <button class="optionButton">Modificar Senha</button>
+                    <button class="optionButton">Sair</button>
+                    <button class="optionButton">Excluir conta</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 <script src='script.js'>
-    
+
 </script>
 
 </html>

@@ -236,6 +236,64 @@ table, th, td {
     display: none;
 }
 
+.exit {
+    width: 30px;
+    height: 30px;
+    font-size: 27px;
+    color: #ffc632;
+    background-color: #24221f;
+    border: 0px;
+    border-radius: 5px;
+    font-weight : 600;
+    margin: 10px 0 0 10px;
+  }
+  
+  .exit:hover {
+    background-color: #ffc632;
+    color: #24221f;	
+  }
+  
+  .optionButton {
+    border: #ffc632 solid 2px;
+    background-color: #24221f;
+    color: #afb6c2;
+    height: 25px;
+    padding: 0 5px
+  }
+  
+  .config {
+    width: 400px;
+    height: 250px;
+    background-color: #24221f;
+    display: none;
+    margin-top: 3%;
+    flex-direction: column;
+  }
+
+  .configButton {
+    color: #ffc632;
+    background-color: #191816;
+    border: 2px #ffc632 solid;
+    display: flex;
+    font-weight: 500;
+  }
+
+  .configButton:hover {
+    color: #191816;
+    background-color: #ffc632;
+    border: 2px #24221f solid;
+  }
+
+  #config-button-area {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #config-button-area > button {
+    width: 50%;
+    margin: 3% auto;
+  }
+
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #24221f inset !important;
     -webkit-text-fill-color: #afb6c2 !important;

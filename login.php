@@ -2,12 +2,9 @@
 
 include './models/user.php';
 
-include './src/file-management.php';
-
 include './src/validation.php';
 
 require './core.php';
-
 
 session_start();
 

@@ -24,7 +24,6 @@ function main()
         if ($validation->registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
             $creatingUser = $user->insert(array('name' => $username, 'email' => $useremail, 'password' => $userpassword));
             session_unset();
-            header("Location: login.php");
         }
     }
 }
