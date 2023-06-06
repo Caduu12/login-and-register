@@ -9,10 +9,17 @@ class Userconfiguration
         if ($redirect == true) {
             $redirection = "Location: " . $fileToRedirect;
             header($redirection);
-        }      
+        }
     }
 
-    function changeUserInfo() {
-        
+    function showUserName($userinfo)
+    {
+        $name = $userinfo["name"];
+
+        $nameSeparate = explode(" ", $name);
+
+        $firstName = $nameSeparate[0];
+
+        return $firstName;
     }
 }

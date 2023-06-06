@@ -178,10 +178,27 @@ p {
     font-family: 'poppins';
 }
 
-table, th, td {
-    border: #ffc632 solid 1px;
+.user-data-table {
     margin-top: 10px;
-    width: 100%;
+    width: 400px;
+    color:#d4ccb6;
+    text-align: center;
+}
+
+#user-travel-data-table-head {
+    font-family: 'poppins';
+    background-color: #ffc632;
+    color: #191816;
+    font-weight: 700;
+}
+
+#user-travel-data-table-body {
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+
+.user-data-cell {
+    padding: 5px 0  5px 0;
 }
 
 .tableButton {
@@ -246,53 +263,57 @@ table, th, td {
     border-radius: 5px;
     font-weight : 600;
     margin: 10px 0 0 10px;
-  }
+}
   
-  .exit:hover {
+.exit:hover {
     background-color: #ffc632;
     color: #24221f;	
-  }
+}
   
-  .optionButton {
+.optionButton {
     border: #ffc632 solid 2px;
     background-color: #24221f;
     color: #afb6c2;
     height: 25px;
     padding: 0 5px
-  }
+}
   
-  .config {
+.config {
     width: 400px;
     height: 250px;
     background-color: #24221f;
     display: none;
     margin-top: 3%;
     flex-direction: column;
-  }
+}
 
-  .configButton {
+.configButton {
     color: #ffc632;
     background-color: #191816;
     border: 2px #ffc632 solid;
     display: flex;
     font-weight: 500;
-  }
+}
 
-  .configButton:hover {
+.configButton:hover {
     color: #191816;
     background-color: #ffc632;
     border: 2px #24221f solid;
-  }
+}
 
-  #config-button-area {
+#config-button-area {
     display: flex;
     flex-direction: column;
-  }
+}
 
-  #config-button-area > button {
+#config-button-area > * {
     width: 50%;
     margin: 3% auto;
-  }
+}
+
+.optionButton {
+    width: 100%;
+}
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #24221f inset !important;
