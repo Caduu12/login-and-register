@@ -1,4 +1,17 @@
 <?php
+include '../models/Travel.php';
+
+require '../core.php';
+    
+include '../src/userConfig.php';
+    
+$userConfig = new Userconfiguration();
+    
+$travel = new Travel();
+
+if (isset($_POST["log_out"])) {
+    $userConfig->endSession(true, "./../register.php");
+}
 
 ?>
 
@@ -16,6 +29,10 @@
 <body>
     <div class="fullcontent">
         <img src="./../assets/logo.svg" class="logo">
+        <form action="./admin-main.php" method="post">
+            <input type="submit" class="optionButton" value="Sair" name="log_out">
+        </form>
+
         <div>
             <table class="user-data-table">
                 <thead id="user-travel-data-table-head">

@@ -30,7 +30,6 @@ function main()
     if ($_SESSION["flag"] == true  && $_SESSION["admin_user"] == false) {
         header("Location: ./index.php");
     }
-
 }
 
 main()
