@@ -114,7 +114,7 @@ class Validation
     {
         $user = new User();
 
-        $queryResult = $user->select( array( "`email`" => $email, "`password`" => $password ), '`id`, `name`, `email`');
+        $queryResult = $user->select( array( "`email`" => $email, "`password`" => $password ), '`id`, `name`, `email`, `is_admin`');
 
         if (empty($queryResult)) {
             return false;

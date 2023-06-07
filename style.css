@@ -172,16 +172,10 @@ p {
     margin-top: 5px;
 }
 
-#table, #table222 {
-    color: #D4CCB6;
-    display: none;
-    font-family: 'poppins';
-}
-
 .user-data-table {
     margin-top: 10px;
     width: 400px;
-    color:#d4ccb6;
+    color:#afb6c2;
     text-align: center;
 }
 
@@ -193,8 +187,9 @@ p {
 }
 
 #user-travel-data-table-body {
-    font-family: 'Roboto';
+    font-family: 'poppins';
     font-weight: 400;
+    font-size: 13px;
 }
 
 .user-data-cell {
@@ -285,14 +280,14 @@ p {
     display: none;
     margin-top: 3%;
     flex-direction: column;
+    position: absolute;
 }
 
 .configButton {
     color: #ffc632;
     background-color: #191816;
     border: 2px #ffc632 solid;
-    display: flex;
-    font-weight: 500;
+    height: 35px;
 }
 
 .configButton:hover {
@@ -313,6 +308,24 @@ p {
 
 .optionButton {
     width: 100%;
+}
+
+.content {
+    justify-content: center;
+    position: relative;
+}
+
+#logout {
+    background-color: #e53300;
+    color: #ff9b7f;
+}
+
+.modal-open {
+    display: block;
+}
+
+.modal-close {
+    display: none;
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {

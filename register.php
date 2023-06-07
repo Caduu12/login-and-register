@@ -22,8 +22,9 @@ function main()
         $userConfirmedPassword = $_POST["confirmPassword"];
 
         if ($validation->registerValidationTrigger($username, $useremail, $userpassword, $userConfirmedPassword)) {
-            $creatingUser = $user->insert(array('name' => $username, 'email' => $useremail, 'password' => $userpassword));
+            $user->insert(array('name' => $username, 'email' => $useremail, 'password' => $userpassword, 'is_admin' => false));
             session_unset();
+            header('location: login.php');
         }
     }
 }

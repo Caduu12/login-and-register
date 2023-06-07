@@ -53,7 +53,6 @@ class Database
 
             $attributes .= "`" . $attrNames[$x] . "` = '" . $arraySelectOne[$attrNames[$x]] . "'";
         }
-
         return $this->conn->query("SELECT " . $argSelectOne . " FROM " . $this->tableName . " WHERE " . $attributes . " LIMIT 1")->fetchAll();
     }
 
