@@ -122,6 +122,14 @@ class Validation
 
         $_SESSION["userinfo"] = $queryResult[0];
 
+        if ( $_SESSION["userinfo"]["is_admin"] == "1")  {
+            $_SESSION["admin_user"] = true;
+        }
+
+        if ( $_SESSION["userinfo"]["is_admin"] == "0") {
+            $_SESSION["admin_user"] = false;
+        }
+
         return true;
     }
 }

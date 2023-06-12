@@ -40,6 +40,11 @@ class Database
         return $this->conn->query("SELECT " . $argSelect . " FROM " . $this->tableName)->fetchAll();
     }
 
+    public function selectJoin( $typeOfJoin, $nameOfJoinTable, $joinCondition, $attrArray = null, $argSelect = "*")
+    {
+        //Toda a estrutura de parametro  foi feita já, falta a função :)
+    }
+
     public function selectOne($arraySelectOne, $argSelectOne = '*')
     {
         $attributes = "";

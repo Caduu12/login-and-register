@@ -22,17 +22,4 @@ class Userconfiguration
 
         return $firstName;
     }
-
-    function defineUserRole()
-    {
-        $userAtributtion = $_SESSION["userinfo"]["is_admin"];
-
-        if ( $userAtributtion == true)  {
-            $_SESSION["admin_user"] = true;
-        }
-
-        if ( $userAtributtion == false) {
-            $_SESISON["admin_user"] = false;
-        }
-    }
 }

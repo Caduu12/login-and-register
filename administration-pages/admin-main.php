@@ -1,17 +1,29 @@
 <?php
 include '../models/Travel.php';
-
-require '../core.php';
     
 include '../src/userConfig.php';
     
+require '../core.php';
+
+require '../userRoute.php';
+
 $userConfig = new Userconfiguration();
     
 $travel = new Travel();
 
 if (isset($_POST["log_out"])) {
-    $userConfig->endSession(true, "./../register.php");
+    $userConfig->endSession(true, "./../login.php");
 }
+
+session_start();
+
+isRouteCorrect(basename(__FILE__));
+
+$usersTravelHistory = $travel->select();
+
+echo dd($usersTravelHistory);
+
+die();
 
 ?>
 
@@ -22,7 +34,7 @@ if (isset($_POST["log_out"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>administration</title>
+    <title>Administrção</title>
     <link rel='stylesheet' href='./../style.css'>
 </head>
 
@@ -34,17 +46,7 @@ if (isset($_POST["log_out"])) {
         </form>
 
         <div>
-            <table class="user-data-table">
-                <thead id="user-travel-data-table-head">
-                    <tr>
-                        <td class="user-data-cell">Nome da viagem</td>
-                        <td class="user-data-cell">Data da compra</td>
-                    </tr>
-                </thead>
-                <tbody id="user-travel-data-table-body">
-                    <?php echo $userTableData ?>
-                </tbody>
-            </table>
+            
         </div>
     </div>
 </body>

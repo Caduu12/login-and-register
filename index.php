@@ -4,6 +4,8 @@ include './models/Travel.php';
 
 require './core.php';
 
+require './userRoute.php';
+
 include 'src/userConfig.php';
 
 $userConfig = new Userconfiguration();
@@ -15,6 +17,8 @@ if (isset($_POST["log_out"])) {
 }
 
 session_start();
+
+isRouteCorrect(basename(__FILE__));
 
 if (!isset($_SESSION["flag"])) {
     header("Location: ./login.php");

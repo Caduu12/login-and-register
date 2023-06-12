@@ -8,27 +8,21 @@ include 'src/userConfig.php';
 
 require './core.php';
 
+require 'userRoute.php';
+
 session_start();
 
 function main()
 {
     $validation = new Validation();
 
-    $userConfig = new Userconfiguration();
-
     if (isset($_POST["email"]) && isset($_POST["password"])) {
         $useremail = strtolower($_POST["email"]);
         $validation->logInValidationTrigger($useremail, $_POST["password"]);
     }
 
-    $userConfig->defineUserRole();
-
-    if ($_SESSION["flag"] == true && $_SESSION["admin_user"] == true) {
-        header("Location: ./administration-pages/admin-main.php");
-    }
-
-    if ($_SESSION["flag"] == true  && $_SESSION["admin_user"] == false) {
-        header("Location: ./index.php");
+    if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {
+        redirectByPermission();
     }
 }
 
