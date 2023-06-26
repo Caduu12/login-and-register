@@ -6,7 +6,8 @@ class Userconfiguration
     {
         setcookie(session_name(), "", time() - 3600);
         session_unset();
-        if ($redirect == true) {
+        session_destroy();
+        if ($redirect === true) {
             $redirection = "Location: " . $fileToRedirect;
             header($redirection);
         }

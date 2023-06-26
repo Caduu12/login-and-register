@@ -10,16 +10,23 @@ require './core.php';
 
 require 'userRoute.php';
 
+$userConfig = new Userconfiguration();
+
 session_start();
+
+if ($_SESSION) {
+    $userConfig->endSession();
+}
 
 function main()
 {
     $validation = new Validation();
-
+    
     if (isset($_POST["email"]) && isset($_POST["password"])) {
         $useremail = strtolower($_POST["email"]);
         $validation->logInValidationTrigger($useremail, $_POST["password"]);
     }
+
 
     if (isset($_SESSION["flag"]) && $_SESSION["flag"] == true) {
         redirectByPermission();

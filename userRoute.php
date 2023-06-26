@@ -17,9 +17,12 @@ if(!function_exists('redirectByPermission')) {
 if (!function_exists('isPermissionCorrect')) {
     function isRouteCorrect($userLocation)
     {
+        // header("Location: ./../index.php");
+
         $commonUserRoute = ["index.php"];
 
         $adminUserRoute = ["admin-pages.php"];
+
 
         if ($_SESSION["admin_user"] === true) {
             $routeToUse = $adminUserRoute;
@@ -29,7 +32,7 @@ if (!function_exists('isPermissionCorrect')) {
 
         if ($_SESSION["admin_user"] === false) {
             $routeToUse = $commonUserRoute;
-            $pathToRedirect = "../index.php";
+            $pathToRedirect = "./arquivonaoexiste.php";
         }
 
         foreach ($routeToUse as $value) {
@@ -38,6 +41,6 @@ if (!function_exists('isPermissionCorrect')) {
             }
         }
 
-        header("Location : " . $pathToRedirect);
+        // header("Location : /../index.php");
     }
 }

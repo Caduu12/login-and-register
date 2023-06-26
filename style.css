@@ -174,7 +174,7 @@ p {
 
 .user-data-table {
     margin-top: 10px;
-    width: 400px;
+    width: 70%;
     color:#afb6c2;
     text-align: center;
 }
@@ -331,6 +331,21 @@ p {
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #24221f inset !important;
     -webkit-text-fill-color: #afb6c2 !important;
+}
+
+.info-button {
+    background-color: #ffc632;
+    border-radius: 100%;
+    font-family: 'poppins';
+    font-size: "11px";
+    border: #000000 1px solid;
+    width: 15%;
+}
+
+.info-button:active {
+    background-color: #000000;
+    color: #ffc632;
+    border: #ffffff 1px solid;
 }
 
             /* Daqui pra baixo só eh pra responsividade!!!! */

@@ -19,6 +19,8 @@ class Database
         return $this->conn;
     }
 
+// Select
+
     public function select($attrArray = null, $argSelect = '*')
     {
         if (isset($attrArray)) {
@@ -40,10 +42,21 @@ class Database
         return $this->conn->query("SELECT " . $argSelect . " FROM " . $this->tableName)->fetchAll();
     }
 
-    public function selectJoin( $typeOfJoin, $nameOfJoinTable, $joinCondition, $attrArray = null, $argSelect = "*")
+// Select com duas tabelas
+
+    public function selectJoin( $typeOfJoin, $nameOfJoinTable, $joinCondition, $argSelect = "*")
     {
-        //Toda a estrutura de parametro  foi feita já, falta a função :)
+        $joinConditionUntrim = "";
+
+        foreach($joinCondition as $key => $value) {
+            $joinConditionUntrim .= $key . "." . $value . " = ";
+            $joinConditionTrim = rtrim($joinConditionUntrim, " = ");
+        }
+       
+        return $this->conn->query("SELECT " . $argSelect . " FROM `" . $this->tableName . "` " . $typeOfJoin . " `" . $nameOfJoinTable . "`  ON " . $joinConditionTrim)->fetchAll();
     }
+
+// Select somente com um resultado
 
     public function selectOne($arraySelectOne, $argSelectOne = '*')
     {
@@ -60,6 +73,8 @@ class Database
         }
         return $this->conn->query("SELECT " . $argSelectOne . " FROM " . $this->tableName . " WHERE " . $attributes . " LIMIT 1")->fetchAll();
     }
+
+// Insert Into
 
     public function insert($attrValues)
     {
@@ -81,10 +96,14 @@ class Database
         return $this->conn->query("INSERT INTO " . $this->tableName . " ( " . $tableAttr . " ) VALUES (" . $values .  ")")->fetchAll();
     }
 
+// Update
+
     // public function update($valuesToUpdate, $attrCompared)
     // {
     //     return $this->conn->query("UPDATE " . $this->tableName . " SET " . $attrToUpdate . " = " . $valueUpdated . " WHERE " . $attrCompared . " = " . $valueCompared);
     // }
+
+// Delete
 
     public function delete($attrDelete = "id", $valueDelete)
     {
