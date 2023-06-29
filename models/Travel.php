@@ -1,15 +1,14 @@
-<?php
+<?php 
 
 include 'Database.php';
 
 
-class Travel extends Database
+class Travel extends Database 
 {
     private $tableName = 'travels';
 
-    public function __construct()
+    public function __construct() 
     {
         parent::__construct($this->tableName);
     }
-
 }

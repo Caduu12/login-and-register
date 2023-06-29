@@ -3,7 +3,7 @@
 include 'Database.php';
 
 
-class Travel extends Database
+class Tickets extends Database
 {
     private $tableName = 'tickets';
 
